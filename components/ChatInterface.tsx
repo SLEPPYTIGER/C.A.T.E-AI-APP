@@ -124,9 +124,16 @@ export default function ChatInterface({
         chatId,
       };
 
-      const response = await fetch("/api/chat/stream", {
+      // Get the base URL from environment variable or use relative path
+      const baseUrl = process.env.NEXT_PUBLIC_APP_URL || '';
+      const response = await fetch(`${baseUrl}/api/chat/stream`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+          "Content-Type": "application/json",
+          // Add cache control headers
+          "Cache-Control": "no-cache",
+          "Pragma": "no-cache"
+        },
         body: JSON.stringify(requestBody),
       });
 
