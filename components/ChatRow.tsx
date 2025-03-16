@@ -5,7 +5,7 @@ import { use } from "react";
 import { Button } from "./ui/button";
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
-import TimeAgo from 'timeago-react';
+import TimeAgo from 'react-timeago';
 import { motion } from "framer-motion";
 import { MessageSquare, Trash2, Clock } from "lucide-react";
 
@@ -64,7 +64,7 @@ function ChatRow({
                                 <div className="flex items-center gap-1.5 mt-1">
                                     <Clock className="h-3 w-3 text-gray-400" />
                                     <p className="text-xs text-gray-400 font-medium">
-                                        <TimeAgo datetime={new Date(lastMessage.createdAt)} />
+                                        <TimeAgo date={lastMessage.createdAt} />
                                     </p>
                                 </div>
                             )}
