@@ -17,6 +17,30 @@ interface ChatInterfaceProps {
   initialMessages: Doc<"messages">[];
 }
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.3
+    }
+  }
+};
+
+const sectionVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "spring",
+      stiffness: 300,
+      damping: 30
+    }
+  }
+};
+
 export default function ChatInterface({
   chatId,
   initialMessages,
@@ -239,10 +263,17 @@ export default function ChatInterface({
   }
 
   return (
-    <main className="flex flex-col h-[calc(100vh-theme(spacing.14))]" suppressHydrationWarning>
-      <section
+    <motion.main
+      className="flex flex-col h-[calc(100vh-theme(spacing.14))]"
+      suppressHydrationWarning
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      <motion.section
         ref={chatContainerRef}
         className="flex-1 overflow-y-auto relative"
+        variants={sectionVariants}
       >
         {/* Animated background */}
         <div className="fixed inset-0 -z-30 bg-[radial-gradient(circle_at_50%_120%,#ffffff,#f3f4f6_40%,#e5e7eb_80%)] opacity-70" />
@@ -255,29 +286,47 @@ export default function ChatInterface({
         <div className="fixed -bottom-8 left-1/3 w-40 h-40 bg-purple-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000 -z-10" />
         <div className="fixed top-1/3 -right-20 w-40 h-40 bg-green-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000 -z-10" />
 
-        <div className="max-w-4xl mx-auto p-4 space-y-6">
+        <motion.div 
+          className="max-w-4xl mx-auto p-4 space-y-6"
+          variants={sectionVariants}
+        >
           <AnimatePresence mode="popLayout">
             {messages?.length === 0 && <WelcomeMessage />}
 
             {messages?.map((message: Doc<"messages">) => (
-              <div key={message._id} className="opacity-100">
+              <motion.div
+                key={message._id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
                 <MessageBubble
                   content={message.content}
                   isUser={message.role === "user"}
                 />
-              </div>
+              </motion.div>
             ))}
 
             {streamedResponse && (
-              <div className="opacity-100">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
                 <MessageBubble 
                   content={streamedResponse} 
                 />
-              </div>
+              </motion.div>
             )}
 
             {isLoading && !streamedResponse && (
-              <div className="flex justify-start">
+              <motion.div
+                className="flex justify-start"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+              >
                 <div className="rounded-2xl px-5 py-3 bg-gradient-to-br from-white to-gray-50 text-gray-900 rounded-bl-none shadow-sm ring-1 ring-inset ring-gray-200/50 backdrop-blur-sm">
                   <div className="flex items-center gap-2">
                     <div className="flex gap-1.5">
@@ -299,17 +348,18 @@ export default function ChatInterface({
                     </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             )}
           </AnimatePresence>
           <div ref={messagesEndRef} />
-        </div>
-      </section>
+        </motion.div>
+      </motion.section>
 
       <motion.footer
         className="border-t bg-white/80 backdrop-blur-sm p-4 shadow-sm relative"
-        initial={false}
-        animate={isInputFocused ? { height: "auto", scale: 1 } : { height: "auto", scale: 1 }}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.5, type: "spring", stiffness: 300 }}
       >
         <form onSubmit={handleSubmit} className="max-w-4xl mx-auto relative">
           <div className="relative flex items-center">
@@ -376,6 +426,6 @@ export default function ChatInterface({
           </div>
         </form>
       </motion.footer>
-    </main>
+    </motion.main>
   );
 }
