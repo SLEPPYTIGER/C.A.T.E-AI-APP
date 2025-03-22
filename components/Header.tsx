@@ -2,13 +2,17 @@
 
 import { UserButton } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
-import { HamburgerMenuIcon } from "@radix-ui/react-icons";
+import { HamburgerMenuIcon, QuestionMarkCircledIcon } from "@radix-ui/react-icons";
 import { useContext } from "react";
 import { NavigationContext } from "@/lib/NavigationProvider";
 import { motion } from "framer-motion";
 import Link from "next/link";
 
-function Header() {
+interface HeaderProps {
+  onShowTutorial?: () => void;
+}
+
+function Header({ onShowTutorial }: HeaderProps) {
   const navigation = useContext(NavigationContext);
   
   if (!navigation) {
@@ -197,15 +201,26 @@ function Header() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.4, duration: 0.5 }}
         >
-          <UserButton
-            appearance={{
-              elements: {
-                avatarBox:
-                  "h-10 w-10 ring-2 ring-gray-200/50 ring-offset-2 rounded-full transition-all duration-300 hover:ring-blue-400/50 hover:ring-3 hover:shadow-md",
-                userButtonTrigger: "focus:outline-none",
-              },
-            }}
-          />
+          <div className="flex items-center gap-3">
+            <motion.button
+              onClick={onShowTutorial}
+              className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 text-gray-600 hover:text-gray-900 transition-all duration-300"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              title="Show Tutorial"
+            >
+              <QuestionMarkCircledIcon className="w-5 h-5" />
+            </motion.button>
+            <UserButton
+              appearance={{
+                elements: {
+                  avatarBox:
+                    "h-10 w-10 ring-2 ring-gray-200/50 ring-offset-2 rounded-full transition-all duration-300 hover:ring-blue-400/50 hover:ring-3 hover:shadow-md",
+                  userButtonTrigger: "focus:outline-none",
+                },
+              }}
+            />
+          </div>
           {/* Optional CTA Button */}
           <Link href="/get-started">
             <motion.div

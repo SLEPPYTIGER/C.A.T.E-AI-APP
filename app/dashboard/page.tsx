@@ -3,6 +3,8 @@
 import { BotIcon, Sparkles, Zap, Wrench } from "lucide-react";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { useTutorial } from "@/lib/TutorialContext";
+import DashboardTutorial from "@/components/DashboardTutorial";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -32,6 +34,7 @@ const features = [
 
 export default function DashboardPage() {
   const [isMounted, setIsMounted] = useState(false);
+  const { showTutorial, setShowTutorial } = useTutorial();
 
   useEffect(() => {
     setIsMounted(true);
@@ -40,6 +43,14 @@ export default function DashboardPage() {
   if (!isMounted) {
     return null;
   }
+
+  const handleTutorialComplete = () => {
+    setShowTutorial(false);
+  };
+
+  const handleTutorialSkip = () => {
+    setShowTutorial(false);
+  };
 
   return (
     <div className="flex-1 flex items-center justify-center p-4 min-h-[80vh] relative overflow-hidden" suppressHydrationWarning>
@@ -54,8 +65,15 @@ export default function DashboardPage() {
       <div className="absolute -bottom-8 left-1/3 w-40 h-40 bg-purple-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000" />
       <div className="absolute top-1/3 -right-20 w-40 h-40 bg-green-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000" />
 
-      <motion.div 
-        className="relative max-w-2xl w-full"
+      {showTutorial && (
+        <DashboardTutorial
+          onComplete={handleTutorialComplete}
+          onSkip={handleTutorialSkip}
+        />
+      )}
+      
+      <motion.div
+        className="relative max-w-2xl w-full hero-section"
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5 }}

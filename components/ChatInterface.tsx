@@ -389,7 +389,7 @@ export default function ChatInterface({
               onFocus={() => setIsFocused(true)}
               onBlur={() => setIsFocused(false)}
               placeholder="Message AI Agent..."
-              className="flex-1 py-3.5 px-5 rounded-2xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent pr-12 bg-white/50 backdrop-blur-sm placeholder:text-gray-500 relative z-10 transition-all duration-200 text-[15px]"
+              className="message-input flex-1 py-3.5 px-5 rounded-2xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent pr-12 bg-white/50 backdrop-blur-sm placeholder:text-gray-500 relative z-10 transition-all duration-200 text-[15px]"
               disabled={isLoading}
             />
             <motion.div

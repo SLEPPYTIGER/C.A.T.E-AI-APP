@@ -11,7 +11,7 @@ interface NavigationContextType {
 }
 
 export const NavigationContext = createContext<NavigationContextType>({
-    isMobileNavOpen: false,
+    isMobileNavOpen: false, 
     setIsMobileNavOpen: () => {},
     closeMobileNav: () => {},
     isSidebarVisible: true,
@@ -20,7 +20,7 @@ export const NavigationContext = createContext<NavigationContextType>({
 
 export function NavigationProvider({
     children,
-}: {
+}: { 
     children: React.ReactNode;
 }) {
     const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
@@ -29,11 +29,11 @@ export function NavigationProvider({
     const closeMobileNav = () => setIsMobileNavOpen(false);
     const toggleSidebar = () => setIsSidebarVisible(prev => !prev);
 
-    return (
+    return ( 
         <NavigationContext.Provider
-            value={{
-                isMobileNavOpen,
-                setIsMobileNavOpen,
+            value={{ 
+                isMobileNavOpen, 
+                setIsMobileNavOpen, 
                 closeMobileNav,
                 isSidebarVisible,
                 toggleSidebar

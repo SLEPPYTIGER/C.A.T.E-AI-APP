@@ -2,9 +2,9 @@
 
 import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
 import { ArrowRight, Sparkles, Zap, Brain } from "lucide-react";
-import Link from "next/link";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -35,7 +35,7 @@ const features = [
   },
   {
     title: "Smart",
-    description: "Powered by Your Favourite LLM's",
+    description: "Powered by Your Favourite LLM&apos;s",
     icon: Brain,
     color: "bg-violet-400",
   },
@@ -51,6 +51,7 @@ const terminalLines = [
 export default function LandingPage() {
   const [isMounted, setIsMounted] = useState(false);
   const [currentLine, setCurrentLine] = useState(0);
+  const router = useRouter();
 
   useEffect(() => {
     setIsMounted(true);
@@ -60,11 +61,15 @@ export default function LandingPage() {
     return () => clearInterval(timer);
   }, []);
 
+  const handleStartTutorial = () => {
+    router.push("/dashboard");
+  };
+
   if (!isMounted) return null;
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 relative overflow-hidden">
-      {/* Subtle animated background */}
+      {/* Background Elements */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,#f0f4f8_0%,#ffffff_70%)] opacity-50 animate-pulse-slow" />
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#e5e7eb_1px,transparent_1px),linear-gradient(to_bottom,#e5e7eb_1px,transparent_1px)] bg-[size:40px_40px] opacity-10" />
 
@@ -83,7 +88,7 @@ export default function LandingPage() {
       <section className="relative w-full px-6 py-16 mx-auto max-w-7xl min-h-screen flex flex-col justify-center items-center space-y-12">
         {/* Hero Section */}
         <motion.header
-          className="space-y-6 text-center relative w-full max-w-4xl"
+          className="hero-section space-y-6 text-center relative w-full max-w-4xl"
           initial="initial"
           animate="animate"
           variants={staggerContainer}
@@ -110,14 +115,14 @@ export default function LandingPage() {
               Meet your new AI chat companion that goes beyond conversation—it gets things done!
             </p>
             <p className="text-sm text-gray-500">
-              Powered by IBM's WxTools & your favorite LLMs.
+              Powered by IBM&apos;s WxTools & your favorite LLMs.
             </p>
           </motion.div>
         </motion.header>
 
         {/* Terminal Animation */}
         <motion.div
-          className="w-full max-w-xl bg-white/90 backdrop-blur-md rounded-2xl shadow-lg border border-gray-100 overflow-hidden"
+          className="terminal-section w-full max-w-xl bg-white/90 backdrop-blur-md rounded-2xl shadow-lg border border-gray-100 overflow-hidden"
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, delay: 0.2 }}
@@ -154,23 +159,22 @@ export default function LandingPage() {
           transition={{ delay: 0.4, duration: 0.5 }}
         >
           <SignedIn>
-            <Link href="/dashboard">
-              <motion.button
-                className="group relative inline-flex items-center px-8 py-3.5 text-base font-semibold text-white bg-gradient-to-r from-blue-500 to-violet-500 rounded-full shadow-md overflow-hidden"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.98 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <span className="relative z-10 flex items-center">
-                  Get Started
-                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </span>
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-blue-600 to-violet-600 opacity-0 group-hover:opacity-100"
-                  transition={{ duration: 0.3 }}
-                />
-              </motion.button>
-            </Link>
+            <motion.button
+              onClick={handleStartTutorial}
+              className="group relative inline-flex items-center px-8 py-3.5 text-base font-semibold text-white bg-gradient-to-r from-blue-500 to-violet-500 rounded-full shadow-md overflow-hidden"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              <span className="relative z-10 flex items-center">
+                Get Started
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </span>
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-blue-600 to-violet-600 opacity-0 group-hover:opacity-100"
+                transition={{ duration: 0.3 }}
+              />
+            </motion.button>
           </SignedIn>
           <SignedOut>
             <SignInButton mode="modal">
@@ -195,12 +199,12 @@ export default function LandingPage() {
 
         {/* Features Grid */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-5xl"
+          className="features-section grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-5xl"
           variants={staggerContainer}
           initial="initial"
           animate="animate"
         >
-          {features.map(({ title, description, icon: Icon, color }, index) => (
+          {features.map(({ title, description, icon: Icon, color }) => (
             <motion.div
               key={title}
               className="group relative bg-white/70 backdrop-blur-sm rounded-xl p-6 shadow-md border border-gray-100 hover:shadow-lg transition-shadow duration-300"

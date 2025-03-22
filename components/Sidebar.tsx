@@ -57,7 +57,7 @@ function Sidebar() {
             <Button
               onClick={handleNewChat}
               className={cn(
-                "bg-white hover:bg-gray-50 text-gray-700 border border-gray-200/50 shadow-sm hover:shadow transition-all duration-200",
+                "new-chat-button bg-white hover:bg-gray-50 text-gray-700 border border-gray-200/50 shadow-sm hover:shadow transition-all duration-200",
                 isSidebarVisible ? "w-full" : "w-8 h-8 p-0"
               )}
               title="New Chat"
@@ -75,7 +75,7 @@ function Sidebar() {
                   placeholder="Search chats..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-9 pr-4 py-2 bg-white border border-gray-200/50 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+                  className="search-input w-full pl-9 pr-4 py-2 bg-white border border-gray-200/50 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20"
                 />
               </div>
             )}
