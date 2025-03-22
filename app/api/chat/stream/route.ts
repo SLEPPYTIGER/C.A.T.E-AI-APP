@@ -38,15 +38,22 @@ export async function POST(req: Request) {
     const convex = getConvexClient();
 
     // Create stream with larger queue strategy for better performance
-    const stream = new TransformStream({}, { highWaterMark: 1024 });
+    const stream = new TransformStream({}, {
+      highWaterMark: 4096, // Increased buffer size for better performance
+      size() { return 1; }
+    });
     const writer = stream.writable.getWriter();
 
     const response = new Response(stream.readable, {
       headers: {
         "Content-Type": "text/event-stream",
-        // "Cache-Control": "no-cache, no-transform",
-        Connection: "keep-alive",
-        "X-Accel-Buffering": "no", // Disable buffering for nginx which is required for SSE to work properly
+        "Cache-Control": "no-cache, no-transform",
+        "Connection": "keep-alive",
+        "X-Accel-Buffering": "no",
+        "Transfer-Encoding": "chunked",
+        "Content-Encoding": "gzip",
+        "Keep-Alive": "timeout=120",
+        "X-Content-Type-Options": "nosniff"
       },
     });
 

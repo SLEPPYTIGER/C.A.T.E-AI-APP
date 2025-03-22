@@ -121,12 +121,13 @@ export const getLastMessage = query({
       throw new Error("Unauthorized");
     }
 
+    // Use a more specific index query with limit
     const messages = await ctx.db
       .query("messages")
       .withIndex("by_chat", (q) => q.eq("chatId", args.chatId))
       .order("desc")
-      .first();
+      .take(1);
 
-    return messages;
+    return messages[0];
   },
 });

@@ -24,14 +24,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ConvexCLientProvider>
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning={true}>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <ConvexCLientProvider>
+          {children}
+        </ConvexCLientProvider>
       </body>
     </html>
-    </ConvexCLientProvider>
   );
 }
