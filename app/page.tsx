@@ -8,27 +8,36 @@ import { useEffect, useState } from "react";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0 }
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.6, ease: "easeOut" },
+};
+
+const staggerContainer = {
+  animate: {
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
 };
 
 const features = [
-  { 
-    title: "Fast", 
+  {
+    title: "Fast",
     description: "Real-time streamed responses",
     icon: Zap,
-    color: "bg-blue-500"
+    color: "bg-blue-400",
   },
   {
     title: "Modern",
     description: "Next.js 15, Tailwind CSS, Convex, Clerk",
     icon: Sparkles,
-    color: "bg-green-500"
+    color: "bg-emerald-400",
   },
-  { 
-    title: "Smart", 
+  {
+    title: "Smart",
     description: "Powered by Your Favourite LLM's",
     icon: Brain,
-    color: "bg-purple-500"
+    color: "bg-violet-400",
   },
 ];
 
@@ -36,7 +45,7 @@ const terminalLines = [
   "$ Initializing AI system...",
   "$ Loading language models...",
   "$ Connecting to WxTools...",
-  "$ System ready!"
+  "$ System ready!",
 ];
 
 export default function LandingPage() {
@@ -46,178 +55,184 @@ export default function LandingPage() {
   useEffect(() => {
     setIsMounted(true);
     const timer = setInterval(() => {
-      setCurrentLine(prev => (prev < terminalLines.length - 1 ? prev + 1 : prev));
-    }, 1000);
+      setCurrentLine((prev) => (prev < terminalLines.length - 1 ? prev + 1 : prev));
+    }, 800);
     return () => clearInterval(timer);
   }, []);
 
   if (!isMounted) return null;
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-white to-gray-50 relative overflow-hidden">
-      {/* Animated background gradient */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,#ffffff,#f3f4f6_40%,#e5e7eb_80%)] opacity-70" />
-      
-      {/* Animated grid pattern */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.05)_1px,transparent_1px),linear-gradient(to_right,rgba(0,0,0,0.05)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_80%_at_50%_50%,black_40%,transparent_100%)]" />
+    <main className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 relative overflow-hidden">
+      {/* Subtle animated background */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,#f0f4f8_0%,#ffffff_70%)] opacity-50 animate-pulse-slow" />
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#e5e7eb_1px,transparent_1px),linear-gradient(to_bottom,#e5e7eb_1px,transparent_1px)] bg-[size:40px_40px] opacity-10" />
 
-      {/* Floating orbs */}
-      <div className="absolute top-1/4 -left-20 w-40 h-40 bg-blue-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob" />
-      <div className="absolute -bottom-8 left-1/3 w-40 h-40 bg-purple-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000" />
-      <div className="absolute top-1/3 -right-20 w-40 h-40 bg-green-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000" />
+      {/* Floating particles */}
+      <motion.div
+        className="absolute top-20 left-1/4 w-24 h-24 bg-blue-100 rounded-full mix-blend-overlay blur-2xl opacity-60"
+        animate={{ y: [0, -20, 0], scale: [1, 1.1, 1] }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div
+        className="absolute bottom-10 right-1/3 w-32 h-32 bg-emerald-100 rounded-full mix-blend-overlay blur-2xl opacity-60"
+        animate={{ y: [0, 20, 0], scale: [1, 1.05, 1] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+      />
 
-      <section className="relative w-full px-4 py-12 mx-auto max-w-7xl sm:px-6 lg:px-8 min-h-screen flex flex-col justify-center items-center space-y-16">
-        {/* Hero content */}
-        <motion.header 
-          className="space-y-8 text-center relative w-full max-w-3xl mx-auto"
+      <section className="relative w-full px-6 py-16 mx-auto max-w-7xl min-h-screen flex flex-col justify-center items-center space-y-12">
+        {/* Hero Section */}
+        <motion.header
+          className="space-y-6 text-center relative w-full max-w-4xl"
           initial="initial"
           animate="animate"
-          variants={{
-            initial: { opacity: 0, y: 30 },
-            animate: { opacity: 1, y: 0 }
-          }}
-          transition={{ duration: 0.8 }}
+          variants={staggerContainer}
         >
-          <motion.div 
-            className="relative"
-            whileHover={{ scale: 1.02 }}
-            transition={{ type: "spring", stiffness: 300 }}
-          >
-            <motion.h1 
-              className="text-6xl font-bold tracking-tight sm:text-8xl bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-gray-700 to-gray-900 pb-2"
-              animate={{ 
-                backgroundPosition: ["0%", "100%"],
-                scale: [1, 1.02, 1],
-                rotate: [0, 1, -1, 0]
-              }}
-              transition={{ 
-                backgroundPosition: { duration: 8, repeat: Infinity, repeatType: "reverse" },
-                scale: { duration: 2, repeat: Infinity, repeatType: "reverse" },
-                rotate: { duration: 4, repeat: Infinity, repeatType: "reverse" }
-              }}
-            >
-              C.A.T.E-AI-SAAS
-            </motion.h1>
-          </motion.div>
-
-          <motion.div 
-            className="max-w-2xl mx-auto text-center"
+          <motion.h1
+            className="text-5xl sm:text-7xl font-extrabold tracking-tight text-gray-900"
             variants={fadeInUp}
+            whileHover={{ scale: 1.02 }}
+            transition={{ type: "spring", stiffness: 200 }}
           >
-            <p className="text-xl text-gray-700 md:text-2xl/relaxed">
-              Meet your new AI chat companion that goes beyond conversation - it
-              can actually get things done!
+            <span className="relative inline-block">
+              C.A.T.E-AI-SAAS
+              <motion.span
+                className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-violet-400 rounded-full"
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+              />
+            </span>
+          </motion.h1>
+
+          <motion.div className="max-w-2xl mx-auto space-y-2" variants={fadeInUp}>
+            <p className="text-lg sm:text-xl text-gray-700 leading-relaxed">
+              Meet your new AI chat companion that goes beyond conversation—it gets things done!
             </p>
-            <p className="text-gray-600 text-base mt-2">
-              Powered by IBM&apos;s WxTools & your favourite LLM&apos;s.
+            <p className="text-sm text-gray-500">
+              Powered by IBM's WxTools & your favorite LLMs.
             </p>
           </motion.div>
         </motion.header>
 
         {/* Terminal Animation */}
         <motion.div
-          className="w-full max-w-2xl mx-auto bg-gray-900 rounded-xl overflow-hidden shadow-2xl"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
+          className="w-full max-w-xl bg-white/90 backdrop-blur-md rounded-2xl shadow-lg border border-gray-100 overflow-hidden"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <div className="flex items-center gap-2 px-4 py-3 bg-gray-800">
-            <div className="w-3 h-3 rounded-full bg-red-500" />
-            <div className="w-3 h-3 rounded-full bg-yellow-500" />
-            <div className="w-3 h-3 rounded-full bg-green-500" />
+          <div className="flex items-center gap-2 px-4 py-2 bg-gray-100">
+            <div className="w-2.5 h-2.5 rounded-full bg-red-400" />
+            <div className="w-2.5 h-2.5 rounded-full bg-yellow-400" />
+            <div className="w-2.5 h-2.5 rounded-full bg-green-400" />
           </div>
-          <div className="p-6 font-mono text-sm text-green-400">
+          <div className="p-5 font-mono text-sm text-gray-800">
             {terminalLines.slice(0, currentLine + 1).map((line, index) => (
               <motion.div
                 key={line}
-                initial={{ opacity: 0, x: -10 }}
+                initial={{ opacity: 0, x: -15 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.5 }}
-                className="py-1"
+                transition={{ delay: index * 0.3 }}
+                className="py-0.5"
               >
                 {line}
               </motion.div>
             ))}
             <motion.span
               animate={{ opacity: [0, 1] }}
-              transition={{ duration: 0.8, repeat: Infinity }}
-              className="inline-block w-2 h-4 bg-green-400 ml-1"
+              transition={{ duration: 0.5, repeat: Infinity }}
+              className="inline-block w-1.5 h-3 bg-gray-800 ml-1"
             />
           </div>
         </motion.div>
 
         {/* CTA Button */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.3, duration: 0.5 }}
-          className="text-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 0.5 }}
         >
           <SignedIn>
             <Link href="/dashboard">
-              <motion.button 
-                className="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-medium text-white overflow-hidden rounded-full bg-gradient-to-r from-blue-500 to-purple-500 shadow-lg"
+              <motion.button
+                className="group relative inline-flex items-center px-8 py-3.5 text-base font-semibold text-white bg-gradient-to-r from-blue-500 to-violet-500 rounded-full shadow-md overflow-hidden"
                 whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 400 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ type: "spring", stiffness: 300 }}
               >
                 <span className="relative z-10 flex items-center">
                   Get Started
-                  <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </span>
-                <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl" />
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-blue-600 to-violet-600 opacity-0 group-hover:opacity-100"
+                  transition={{ duration: 0.3 }}
+                />
               </motion.button>
             </Link>
           </SignedIn>
-
           <SignedOut>
             <SignInButton mode="modal">
-              <motion.button 
-                className="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-medium text-white overflow-hidden rounded-full bg-gradient-to-r from-blue-500 to-purple-500 shadow-lg"
+              <motion.button
+                className="group relative inline-flex items-center px-8 py-3.5 text-base font-semibold text-white bg-gradient-to-r from-blue-500 to-violet-500 rounded-full shadow-md overflow-hidden"
                 whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 400 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ type: "spring", stiffness: 300 }}
               >
                 <span className="relative z-10 flex items-center">
                   Sign Up
-                  <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </span>
-                <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl" />
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-blue-600 to-violet-600 opacity-0 group-hover:opacity-100"
+                  transition={{ duration: 0.3 }}
+                />
               </motion.button>
             </SignInButton>
           </SignedOut>
         </motion.div>
 
-        {/* Features grid */}
-        <motion.div 
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-5xl mx-auto px-4"
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.6 }}
+        {/* Features Grid */}
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-5xl"
+          variants={staggerContainer}
+          initial="initial"
+          animate="animate"
         >
           {features.map(({ title, description, icon: Icon, color }, index) => (
             <motion.div
               key={title}
-              className="relative group"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 * index }}
-              whileHover={{ y: -5 }}
+              className="group relative bg-white/70 backdrop-blur-sm rounded-xl p-6 shadow-md border border-gray-100 hover:shadow-lg transition-shadow duration-300"
+              variants={fadeInUp}
+              whileHover={{ y: -4 }}
             >
-              <div className="relative overflow-hidden rounded-2xl bg-white/80 backdrop-blur-sm p-8 shadow-lg border border-gray-100 transition-all duration-300">
-                <div className="flex flex-col items-center justify-center text-center h-full">
-                  <div className="relative mb-4">
-                    <div className={`w-3 h-3 rounded-full ${color} animate-ping absolute inset-0`} />
-                    <div className={`w-12 h-12 ${color} rounded-xl flex items-center justify-center relative`}>
-                      <Icon className="w-6 h-6 text-white" />
-                    </div>
-                  </div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">{title}</h3>
-                  <p className="text-gray-600">{description}</p>
-                </div>
+              <div className="flex flex-col items-center text-center">
+                <motion.div
+                  className={`w-10 h-10 ${color} rounded-lg flex items-center justify-center mb-4`}
+                  whileHover={{ rotate: 10, scale: 1.1 }}
+                  transition={{ type: "spring", stiffness: 400 }}
+                >
+                  <Icon className="w-5 h-5 text-white" />
+                </motion.div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-1">{title}</h3>
+                <p className="text-sm text-gray-600">{description}</p>
               </div>
             </motion.div>
           ))}
         </motion.div>
       </section>
+
+      {/* Custom CSS for animations */}
+      <style jsx global>{`
+        @keyframes pulse-slow {
+          0%, 100% { opacity: 0.5; }
+          50% { opacity: 0.8; }
+        }
+        .animate-pulse-slow {
+          animation: pulse-slow 10s infinite ease-in-out;
+        }
+      `}</style>
     </main>
   );
 }

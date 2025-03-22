@@ -176,12 +176,67 @@
   @keyframes gradient {
     0% {
       background-position: 0% 50%;
+      background-size: 200% 200%;
     }
     50% {
       background-position: 100% 50%;
+      background-size: 150% 150%;
     }
     100% {
       background-position: 0% 50%;
+      background-size: 200% 200%;
+    }
+  }
+  
+  @keyframes float {
+    0% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-5px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
+  
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  .glass-effect {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .premium-gradient {
+    background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0.2) 50%,
+      rgba(255, 255, 255, 0.1) 100%
+    );
+  }
+  
+  @keyframes shimmer {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+  
+  @keyframes glow {
+    0% {
+      transform: translateX(-100%) rotate(-15deg);
+    }
+    50% {
+      transform: translateX(100%) rotate(-15deg);
+    }
+    100% {
+      transform: translateX(-100%) rotate(-15deg);
     }
   }
 }
