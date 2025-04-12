@@ -8,6 +8,7 @@ interface NavigationContextType {
     closeMobileNav: () => void;
     isSidebarVisible: boolean;
     toggleSidebar: () => void;
+<<<<<<< HEAD
     isDarkMode: boolean;
     toggleDarkMode: () => void;
     recentChatId: string | null;
@@ -16,14 +17,23 @@ interface NavigationContextType {
 
 export const NavigationContext = createContext<NavigationContextType>({
     isMobileNavOpen: false,
+=======
+}
+
+export const NavigationContext = createContext<NavigationContextType>({
+    isMobileNavOpen: false, 
+>>>>>>> a89900a86c9edb2d4213a789d9bdfbf54be1d2ac
     setIsMobileNavOpen: () => {},
     closeMobileNav: () => {},
     isSidebarVisible: true,
     toggleSidebar: () => {},
+<<<<<<< HEAD
     isDarkMode: false,
     toggleDarkMode: () => {},
     recentChatId: null,
     setRecentChatId: () => {},
+=======
+>>>>>>> a89900a86c9edb2d4213a789d9bdfbf54be1d2ac
 });
 
 export function NavigationProvider({
@@ -33,6 +43,7 @@ export function NavigationProvider({
 }) {
     const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
     const [isSidebarVisible, setIsSidebarVisible] = useState(true);
+<<<<<<< HEAD
     const [isDarkMode, setIsDarkMode] = useState(false);
     const [recentChatId, setRecentChatId] = useState<string | null>(null);
 
@@ -62,6 +73,20 @@ export function NavigationProvider({
                 toggleDarkMode,
                 recentChatId,
                 setRecentChatId
+=======
+
+    const closeMobileNav = () => setIsMobileNavOpen(false);
+    const toggleSidebar = () => setIsSidebarVisible(prev => !prev);
+
+    return ( 
+        <NavigationContext.Provider
+            value={{ 
+                isMobileNavOpen, 
+                setIsMobileNavOpen, 
+                closeMobileNav,
+                isSidebarVisible,
+                toggleSidebar
+>>>>>>> a89900a86c9edb2d4213a789d9bdfbf54be1d2ac
             }}
         >
             {children}

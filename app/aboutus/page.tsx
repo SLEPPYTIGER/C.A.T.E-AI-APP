@@ -8,7 +8,11 @@ import Link from "next/link";
 
 const teamMembers = [
   {
+<<<<<<< HEAD
     name: "Haani Shahrul",
+=======
+    name: "Dr. Sarah Chen",
+>>>>>>> a89900a86c9edb2d4213a789d9bdfbf54be1d2ac
     role: "AI Research Lead",
     description: "A visionary with a Ph.D. in Machine Learning, driving AI innovation with over a decade of expertise.",
     color: "from-blue-400 to-blue-600",

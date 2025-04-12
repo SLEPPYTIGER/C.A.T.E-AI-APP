@@ -17,14 +17,22 @@ function ChatRow({
     onDelete: (id: Id<"chats">) => void;
 }) {
     const router = useRouter();
+<<<<<<< HEAD
     const { closeMobileNav, isSidebarVisible, setRecentChatId } = useContext(NavigationContext);
+=======
+    const { closeMobileNav, isSidebarVisible } = useContext(NavigationContext);
+>>>>>>> a89900a86c9edb2d4213a789d9bdfbf54be1d2ac
     const lastMessage = useQuery(api.messages.getLastMessage, {
         chatId: chat._id,
     });
 
     const handleClick = () => {
+<<<<<<< HEAD
         router.push(`/dashboard/chat/${chat._id}`);
         setRecentChatId(chat._id);
+=======
+        router.push(`/dashboard/chat/${chat._id}`); // ✅ Fixed: Correct template string
+>>>>>>> a89900a86c9edb2d4213a789d9bdfbf54be1d2ac
         closeMobileNav();
     };
     
@@ -43,7 +51,11 @@ function ChatRow({
                 <p className="text-sm text-gray-600 truncate flex-1 font-medium">
                   {lastMessage ? (
                     <>
+<<<<<<< HEAD
                       {lastMessage.role === "user" ? "You: " : "AI: "}
+=======
+                      {lastMessage.role === "user" ? "You" : "AI: "}
+>>>>>>> a89900a86c9edb2d4213a789d9bdfbf54be1d2ac
                       {lastMessage.content.replace(/\\n/g, "\n")}
                     </>
                   ) : (

@@ -21,6 +21,7 @@ import {
 } from "@langchain/core/prompts";
 import SYSTEM_MESSAGE from "@/constants/systemMessage";
 
+<<<<<<< HEAD
 // More aggressive message trimming to manage memory usage
 const trimmer = trimMessages({
   maxTokens: 5, // Reduced from 10 to 5
@@ -46,6 +47,13 @@ const trimmer = trimMessages({
     }
     return Math.ceil(totalChars / 4); // Approximate tokens (4 chars per token)
   },
+=======
+// Trim the messages to manage conversation history
+const trimmer = trimMessages({
+  maxTokens: 10,
+  strategy: "last",
+  tokenCounter: (msgs) => msgs.length,
+>>>>>>> a89900a86c9edb2d4213a789d9bdfbf54be1d2ac
   includeSystem: true,
   allowPartial: false,
   startOn: "human",
@@ -67,14 +75,21 @@ const initialiseModel = () => {
     modelName: "claude-3-5-sonnet-20241022",
     anthropicApiKey: process.env.ANTHROPIC_API_KEY,
     temperature: 0.7,
+<<<<<<< HEAD
     maxTokens: parseInt(process.env.ANTHROPIC_MAX_TOKENS || "2048"), // Use env var or default to 2048
+=======
+    maxTokens: 4096,
+>>>>>>> a89900a86c9edb2d4213a789d9bdfbf54be1d2ac
     streaming: true,
     clientOptions: {
       defaultHeaders: {
         "anthropic-beta": "prompt-caching-2024-07-31",
       },
+<<<<<<< HEAD
       // Add timeout to prevent hanging requests
       timeout: 60000, // 60 seconds timeout
+=======
+>>>>>>> a89900a86c9edb2d4213a789d9bdfbf54be1d2ac
     },
     callbacks: [
       {
@@ -197,16 +212,24 @@ function addCachingHeaders(messages: BaseMessage[]): BaseMessage[] {
 }
 
 export async function submitQuestion(messages: BaseMessage[], chatId: string) {
+<<<<<<< HEAD
   // More aggressive filtering and truncation of messages
   const filteredMessages = messages
     .filter((msg) => msg.content && String(msg.content).length > 0)
     // Limit to last 10 messages to prevent memory issues
     .slice(-10);
+=======
+  // Filter out empty messages to avoid errors
+  const filteredMessages = messages.filter(
+    (msg) => msg.content && String(msg.content).length > 0
+  );
+>>>>>>> a89900a86c9edb2d4213a789d9bdfbf54be1d2ac
 
   if (filteredMessages.length === 0) {
     throw new Error("No valid messages to process.");
   }
 
+<<<<<<< HEAD
   // Truncate very large messages to prevent memory issues
   const truncatedMessages = filteredMessages.map(msg => {
     if (typeof msg.content === 'string' && msg.content.length > 32768) { // 32KB
@@ -230,6 +253,11 @@ export async function submitQuestion(messages: BaseMessage[], chatId: string) {
 
   // Add caching headers to messages
   const cachedMessages = addCachingHeaders(truncatedMessages);
+=======
+  // Add caching headers to messages
+  const cachedMessages = addCachingHeaders(filteredMessages);
+  // console.log("🔒🔒🔒 Messages:", cachedMessages);
+>>>>>>> a89900a86c9edb2d4213a789d9bdfbf54be1d2ac
 
   // Create workflow with chatId and onToken callback
   const workflow = createWorkflow();
@@ -238,6 +266,7 @@ export async function submitQuestion(messages: BaseMessage[], chatId: string) {
   const checkpointer = new MemorySaver();
   const app = workflow.compile({ checkpointer });
 
+<<<<<<< HEAD
   // Avoid logging large message content
   console.log(`Submitting ${cachedMessages.length} messages for chat ${chatId}`);
 
@@ -259,4 +288,18 @@ export async function submitQuestion(messages: BaseMessage[], chatId: string) {
     throw new Error("Failed to process messages: " +
       (error instanceof Error ? error.message : "Unknown error"));
   }
+=======
+  console.log("Submitting messages:", JSON.stringify(cachedMessages, null, 2));
+
+  const stream = await app.streamEvents(
+    { messages: cachedMessages },
+    {
+      version: "v2",
+      configurable: { thread_id: chatId },
+      streamMode: "messages",
+      runId: chatId,
+    }
+  );
+  return stream;
+>>>>>>> a89900a86c9edb2d4213a789d9bdfbf54be1d2ac
 }

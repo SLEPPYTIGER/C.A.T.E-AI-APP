@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
+<<<<<<< HEAD
   experimental: {
     // Memory optimization settings
     memoryBasedWorkersCount: true, // Automatically adjust workers based on available memory
@@ -23,6 +24,8 @@ const nextConfig: NextConfig = {
       sizeLimit: '4mb', // Limit request body size
     },
   },
+=======
+>>>>>>> a89900a86c9edb2d4213a789d9bdfbf54be1d2ac
 };
 
 export default nextConfig;

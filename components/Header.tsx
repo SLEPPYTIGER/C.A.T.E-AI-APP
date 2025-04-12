@@ -14,11 +14,19 @@ interface HeaderProps {
 
 function Header({ onShowTutorial }: HeaderProps) {
   const navigation = useContext(NavigationContext);
+<<<<<<< HEAD
 
   if (!navigation) {
     return null; // Return early if context is not available
   }
 
+=======
+  
+  if (!navigation) {
+    return null; // Return early if context is not available
+  }
+  
+>>>>>>> a89900a86c9edb2d4213a789d9bdfbf54be1d2ac
   const { setIsMobileNavOpen } = navigation;
 
   // Animation variants
@@ -58,7 +66,11 @@ function Header({ onShowTutorial }: HeaderProps) {
         duration: 4,
         repeat: Infinity,
         ease: "easeInOut",
+<<<<<<< HEAD
         repeatDelay: 1,
+=======
+        repeatDelay: 1
+>>>>>>> a89900a86c9edb2d4213a789d9bdfbf54be1d2ac
       },
     },
   };
@@ -73,14 +85,22 @@ function Header({ onShowTutorial }: HeaderProps) {
 
   return (
     <motion.header
+<<<<<<< HEAD
       className="border-b border-gray-200/20 bg-white/90 dark:bg-[#1A1A1A]/90 backdrop-blur-xl sticky top-0 z-50 shadow-sm"
+=======
+      className="border-b border-gray-200/20 bg-white/90 backdrop-blur-xl sticky top-0 z-50 shadow-sm"
+>>>>>>> a89900a86c9edb2d4213a789d9bdfbf54be1d2ac
       initial="hidden"
       animate="visible"
       variants={headerVariants}
     >
       {/* Subtle background animation */}
       <motion.div
+<<<<<<< HEAD
         className="absolute inset-0 bg-gradient-to-r from-blue-100/10 via-violet-100/10 to-transparent dark:from-[#4A90E2]/10 dark:via-[#4A90E2]/5 dark:to-transparent will-change-transform"
+=======
+        className="absolute inset-0 bg-gradient-to-r from-blue-100/10 via-violet-100/10 to-transparent will-change-transform"
+>>>>>>> a89900a86c9edb2d4213a789d9bdfbf54be1d2ac
         animate={{ x: ["-100%", "100%"] }}
         transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
       />
@@ -93,7 +113,11 @@ function Header({ onShowTutorial }: HeaderProps) {
             variant="ghost"
             size="icon"
             onClick={() => setIsMobileNavOpen(true)}
+<<<<<<< HEAD
             className="md:hidden text-gray-600 dark:text-[#D4D4D4] hover:text-gray-900 dark:hover:text-white hover:bg-gray-100/50 dark:hover:bg-[#3A3A3A]/50 rounded-full p-2 transition-all duration-300"
+=======
+            className="md:hidden text-gray-600 hover:text-gray-900 hover:bg-gray-100/50 rounded-full p-2 transition-all duration-300"
+>>>>>>> a89900a86c9edb2d4213a789d9bdfbf54be1d2ac
           >
             <motion.div
               whileHover={{ rotate: 180 }}
@@ -114,7 +138,11 @@ function Header({ onShowTutorial }: HeaderProps) {
               animate="animate"
             >
               {/* Cute Robot Logo */}
+<<<<<<< HEAD
               <div className="w-9 h-9 bg-gradient-to-br from-blue-500 to-violet-500 dark:from-[#4A90E2] dark:to-[#357ABD] rounded-lg flex items-center justify-center overflow-hidden shadow-md">
+=======
+              <div className="w-9 h-9 bg-gradient-to-br from-blue-500 to-violet-500 rounded-lg flex items-center justify-center overflow-hidden shadow-md">
+>>>>>>> a89900a86c9edb2d4213a789d9bdfbf54be1d2ac
                 <svg
                   width="26"
                   height="26"
@@ -152,14 +180,22 @@ function Header({ onShowTutorial }: HeaderProps) {
 
               {/* Glowing accent */}
               <motion.div
+<<<<<<< HEAD
                 className="absolute -inset-2 bg-gradient-to-r from-blue-400 to-violet-400 dark:from-[#4A90E2] dark:to-[#357ABD] opacity-20 blur-lg rounded-lg"
+=======
+                className="absolute -inset-2 bg-gradient-to-r from-blue-400 to-violet-400 opacity-20 blur-lg rounded-lg"
+>>>>>>> a89900a86c9edb2d4213a789d9bdfbf54be1d2ac
                 variants={glowVariants}
                 animate="animate"
               />
             </motion.div>
 
             <motion.div
+<<<<<<< HEAD
               className="text-xl font-semibold bg-gradient-to-r from-gray-900 to-gray-600 dark:from-[#D4D4D4] dark:to-[#A0A0A0] bg-clip-text text-transparent tracking-tight hidden md:block"
+=======
+              className="text-xl font-semibold bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent tracking-tight hidden md:block"
+>>>>>>> a89900a86c9edb2d4213a789d9bdfbf54be1d2ac
               variants={textVariants}
               initial="initial"
               animate="animate"
@@ -180,11 +216,19 @@ function Header({ onShowTutorial }: HeaderProps) {
             <motion.div key={label} variants={navItemVariants} whileHover="hover">
               <Link
                 href={href}
+<<<<<<< HEAD
                 className="text-gray-700 dark:text-[#D4D4D4] hover:text-blue-500 dark:hover:text-[#4A90E2] text-sm font-medium transition-colors duration-200 relative"
               >
                 {label}
                 <motion.span
                   className="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-500 dark:bg-[#4A90E2] rounded-full"
+=======
+                className="text-gray-700 hover:text-blue-500 text-sm font-medium transition-colors duration-200 relative"
+              >
+                {label}
+                <motion.span
+                  className="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-500 rounded-full"
+>>>>>>> a89900a86c9edb2d4213a789d9bdfbf54be1d2ac
                   initial={{ scaleX: 0 }}
                   whileHover={{ scaleX: 1 }}
                   transition={{ duration: 0.3, ease: "easeOut" }}
@@ -204,7 +248,11 @@ function Header({ onShowTutorial }: HeaderProps) {
           <div className="flex items-center gap-3">
             <motion.button
               onClick={onShowTutorial}
+<<<<<<< HEAD
               className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 dark:bg-[#2A2A2A] hover:bg-gray-200 dark:hover:bg-[#3A3A3A] text-gray-600 dark:text-[#D4D4D4] hover:text-gray-900 dark:hover:text-white transition-all duration-300"
+=======
+              className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 text-gray-600 hover:text-gray-900 transition-all duration-300"
+>>>>>>> a89900a86c9edb2d4213a789d9bdfbf54be1d2ac
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               title="Show Tutorial"
@@ -215,7 +263,11 @@ function Header({ onShowTutorial }: HeaderProps) {
               appearance={{
                 elements: {
                   avatarBox:
+<<<<<<< HEAD
                     "h-10 w-10 ring-2 ring-gray-200/50 dark:ring-gray-600/50 ring-offset-2 rounded-full transition-all duration-300 hover:ring-blue-400/50 dark:hover:ring-[#4A90E2]/50 hover:ring-3 hover:shadow-md",
+=======
+                    "h-10 w-10 ring-2 ring-gray-200/50 ring-offset-2 rounded-full transition-all duration-300 hover:ring-blue-400/50 hover:ring-3 hover:shadow-md",
+>>>>>>> a89900a86c9edb2d4213a789d9bdfbf54be1d2ac
                   userButtonTrigger: "focus:outline-none",
                 },
               }}
@@ -228,7 +280,11 @@ function Header({ onShowTutorial }: HeaderProps) {
               whileTap={{ scale: 0.95 }}
               className="hidden md:block"
             >
+<<<<<<< HEAD
               <Button className="bg-gradient-to-r from-blue-500 to-violet-500 dark:from-[#4A90E2] dark:to-[#357ABD] text-white rounded-full px-5 py-2 shadow-md hover:shadow-lg transition-all duration-300">
+=======
+              <Button className="bg-gradient-to-r from-blue-500 to-violet-500 text-white rounded-full px-5 py-2 shadow-md hover:shadow-lg transition-all duration-300">
+>>>>>>> a89900a86c9edb2d4213a789d9bdfbf54be1d2ac
                 Get Started
               </Button>
             </motion.div>

@@ -10,9 +10,12 @@ import {
   StreamMessageType,
   SSE_DATA_PREFIX,
   SSE_LINE_DELIMITER,
+<<<<<<< HEAD
   TokenMessage,
   ToolStartMessage,
   ToolEndMessage
+=======
+>>>>>>> a89900a86c9edb2d4213a789d9bdfbf54be1d2ac
 } from "@/lib/types";
 
 export const runtime = "edge";
@@ -22,6 +25,7 @@ function sendSSEMessage(
   data: StreamMessage
 ) {
   const encoder = new TextEncoder();
+<<<<<<< HEAD
   
   // Handle large tool outputs more efficiently
   if (data.type === StreamMessageType.ToolEnd) {
@@ -105,6 +109,11 @@ function sendSSEMessage(
   return writer.write(
     encoder.encode(
       `${SSE_DATA_PREFIX}${jsonData}${SSE_LINE_DELIMITER}`
+=======
+  return writer.write(
+    encoder.encode(
+      `${SSE_DATA_PREFIX}${JSON.stringify(data)}${SSE_LINE_DELIMITER}`
+>>>>>>> a89900a86c9edb2d4213a789d9bdfbf54be1d2ac
     )
   );
 }
@@ -120,6 +129,7 @@ export async function POST(req: Request) {
       (await req.json()) as ChatRequestBody;
     const convex = getConvexClient();
 
+<<<<<<< HEAD
     // Get buffer size from environment variable or use default
     const bufferSize = parseInt(process.env.NEXT_STREAMING_BUFFER_SIZE || "4096");
     console.log(`Using streaming buffer size: ${bufferSize} bytes`);
@@ -146,6 +156,12 @@ export async function POST(req: Request) {
         // More accurate size calculation
         return chunk?.length || 1;
       }
+=======
+    // Create stream with larger queue strategy for better performance
+    const stream = new TransformStream({}, {
+      highWaterMark: 4096, // Increased buffer size for better performance
+      size() { return 1; }
+>>>>>>> a89900a86c9edb2d4213a789d9bdfbf54be1d2ac
     });
     const writer = stream.writable.getWriter();
 

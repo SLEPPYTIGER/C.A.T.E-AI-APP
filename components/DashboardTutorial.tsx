@@ -1,7 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
+<<<<<<< HEAD
 import { Bot, MessageSquare, Plus, ArrowRight, Sparkles, Moon, Bookmark, ChevronLeft } from "lucide-react";
+=======
+import { Bot, MessageSquare, Search, Plus, ArrowRight, Sparkles } from "lucide-react";
+>>>>>>> a89900a86c9edb2d4213a789d9bdfbf54be1d2ac
 import { useCallback, useEffect, useState } from "react";
 import type { LucideIcon } from "lucide-react";
 
@@ -27,8 +31,13 @@ interface TutorialStep {
 
 const tutorialSteps: TutorialStep[] = [
   {
+<<<<<<< HEAD
     title: "Welcome to CATE!",
     description: "Your AI companion for productive conversations. Let's explore the interface!",
+=======
+    title: "Welcome to Your Dashboard!",
+    description: "Hi friend! Let me show you around your new AI workspace!",
+>>>>>>> a89900a86c9edb2d4213a789d9bdfbf54be1d2ac
     element: ".hero-section",
     icon: Bot,
     spotlight: { size: 400 },
@@ -43,7 +52,11 @@ const tutorialSteps: TutorialStep[] = [
   },
   {
     title: "Start a New Chat",
+<<<<<<< HEAD
     description: "Click this button to begin a fresh conversation with me.",
+=======
+    description: "Click this button to start talking with me! I can help you learn and create amazing things!",
+>>>>>>> a89900a86c9edb2d4213a789d9bdfbf54be1d2ac
     element: ".new-chat-button",
     icon: Plus,
     spotlight: { size: 200 },
@@ -57,7 +70,11 @@ const tutorialSteps: TutorialStep[] = [
   },
   {
     title: "Type Your Message",
+<<<<<<< HEAD
     description: "Type your questions, ideas, or requests here and I'll respond instantly.",
+=======
+    description: "Type anything here and I'll help you! Ask questions, learn coding, or just chat!",
+>>>>>>> a89900a86c9edb2d4213a789d9bdfbf54be1d2ac
     element: ".message-input",
     icon: MessageSquare,
     spotlight: { size: 300 },
@@ -70,6 +87,7 @@ const tutorialSteps: TutorialStep[] = [
     }
   },
   {
+<<<<<<< HEAD
     title: "Recent Conversations",
     description: "Toggle between viewing your recent chats or all conversations.",
     element: "button:has(> svg.lucide-bookmark), button:has(> .BookmarkIcon)",
@@ -77,6 +95,15 @@ const tutorialSteps: TutorialStep[] = [
     spotlight: { size: 200 },
     zoom: 1.4,
     textOffset: { x: 150, y: 0 },
+=======
+    title: "Find Past Chats",
+    description: "Use the search to find our old conversations! It's like a treasure hunt!",
+    element: ".search-input",
+    icon: Search,
+    spotlight: { size: 200 },
+    zoom: 1.4,
+    textOffset: { x: 150, y: 50 },
+>>>>>>> a89900a86c9edb2d4213a789d9bdfbf54be1d2ac
     robotAnimation: {
       rotate: [-10, 10, -10],
       scale: [1, 1.15, 1],
@@ -84,6 +111,7 @@ const tutorialSteps: TutorialStep[] = [
     }
   },
   {
+<<<<<<< HEAD
     title: "Dark Mode",
     description: "Switch between light and dark themes for comfortable viewing day or night.",
     element: "button:has(> svg.lucide-moon), button:has(> .Half2Icon), button:has(> .Half1Icon)",
@@ -114,6 +142,10 @@ const tutorialSteps: TutorialStep[] = [
   {
     title: "You're All Set!",
     description: "You're ready to explore the full potential of CATE. Let's start creating!",
+=======
+    title: "Let's Get Started!",
+    description: "Now you know how to use everything! Ready to start our adventure?",
+>>>>>>> a89900a86c9edb2d4213a789d9bdfbf54be1d2ac
     element: ".hero-section",
     icon: Sparkles,
     spotlight: { size: 400 },
@@ -158,6 +190,7 @@ export default function DashboardTutorial({ onComplete, onSkip }: DashboardTutor
         x: rect.left + rect.width / 2,
         y: rect.top + rect.height / 2,
       });
+<<<<<<< HEAD
     } else {
       // Fallback positions if element not found
       const fallbackPositions: Record<number, { x: number; y: number }> = {
@@ -172,6 +205,8 @@ export default function DashboardTutorial({ onComplete, onSkip }: DashboardTutor
       
       setSpotlightPosition(fallbackPositions[currentStep] || { x: window.innerWidth / 2, y: window.innerHeight / 2 });
       console.log(`Element not found for step ${currentStep}: ${tutorialSteps[currentStep].element}`);
+=======
+>>>>>>> a89900a86c9edb2d4213a789d9bdfbf54be1d2ac
     }
   }, [currentStep]);
 
@@ -229,7 +264,11 @@ export default function DashboardTutorial({ onComplete, onSkip }: DashboardTutor
 
       {/* Robot Mascot */}
       <motion.div
+<<<<<<< HEAD
         className="absolute z-20"
+=======
+        className="absolute"
+>>>>>>> a89900a86c9edb2d4213a789d9bdfbf54be1d2ac
         initial={{ scale: 0 }}
         animate={{
           scale: 1,
@@ -255,7 +294,11 @@ export default function DashboardTutorial({ onComplete, onSkip }: DashboardTutor
 
       {/* Tutorial Text */}
       <motion.div
+<<<<<<< HEAD
         className="absolute z-20"
+=======
+        className="absolute"
+>>>>>>> a89900a86c9edb2d4213a789d9bdfbf54be1d2ac
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{
           opacity: 1,
